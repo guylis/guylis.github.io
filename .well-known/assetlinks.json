@@ -1,0 +1,9 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "foxfoodreviews.wheretoeat",
+    "sha256_cert_fingerprints":
+    ["C3:EC:BE:C0:B2:20:3C:98:84:33:C7:2A:BD:05:B5:35:08:9E:6B:8F:9E:68:3B:84:30:6E:3B:CF:CF:4C:32:C9"]
+  }
+}]
