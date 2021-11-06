@@ -3,7 +3,6 @@
 
 
 <script>
-window.location.replace("https://play.google.com/store/apps/details?id=foxfoodreviews.wheretoeat");
   
   function getOS() {
   var userAgent = window.navigator.userAgent,
@@ -28,13 +27,20 @@ window.location.replace("https://play.google.com/store/apps/details?id=foxfoodre
   return os;
 }
 
-alert(getOS());
+var os = getOS();
+if (os == 'iOS') {
+  window.location.replace("https://apps.apple.com/us/app/where2eat-%D7%97%D7%99%D7%A4%D7%95%D7%A9-%D7%9E%D7%A1%D7%A2%D7%93%D7%95%D7%AA/id1541791512");
+}
+else if (os == 'Android') {
+  window.location.replace("https://play.google.com/store/apps/details?id=foxfoodreviews.wheretoeat");
 
+}
+else {
+  window.location.replace("https://foxfoodreviews2.wordpress.com/");
+
+}
 </script>
 
 </body>
 </html>
-
-
-
 
