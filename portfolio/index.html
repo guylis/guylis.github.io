@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Guy Lis · Mobile Developer</title>
+<meta name="description" content="iOS and Android apps I designed, built and shipped on my own, two tools beyond mobile, and my articles on Medium.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://guylis.github.io/portfolio/">
+<meta property="og:title" content="Guy Lis · Mobile Developer">
+<meta property="og:description" content="iOS and Android apps I designed, built and shipped on my own.">
+<meta property="og:image" content="https://guylis.github.io/portfolio/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F4F5F7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0D0F14" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #F4F5F7; --surface: #FFFFFF; --ink: #12151C; --muted: #5A6170; --line: #E0E3E9;
+  --accent: #0A7C70; --accent-soft: #DDF1EE; --device: #1A1D24; --placeholder: #E9ECF1;
+  --font-display: "Bricolage Grotesque", "Avenir Next", system-ui, sans-serif;
+  --font-body: "Instrument Sans", -apple-system, "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0D0F14; --surface: #161920; --ink: #ECEEF2; --muted: #98A0AD; --line: #262A33;
+    --accent: #3CC7B4; --accent-soft: #123430; --device: #2A2E37; --placeholder: #1E222A;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55; }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+p { margin: 0; }
+a { color: inherit; }
+.gutter { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.wrap { max-width: 1120px; margin: 0 auto; }
+.muted { color: var(--muted); }
+
+/* top bar */
+.topnav { position: sticky; top: 0; z-index: 5; padding-top: env(safe-area-inset-top, 0px); background: color-mix(in srgb, var(--bg) 88%, transparent); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.topnav .wrap { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-block: 12px; flex-wrap: wrap; }
+.topnav nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: 14px; }
+.topnav nav a { text-decoration: none; color: var(--muted); }
+.topnav nav a:hover { color: var(--ink); }
+.brand { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.brand b { font-family: var(--font-display); font-weight: 700; }
+.brand span { font-size: 13px; color: var(--muted); }
+
+/* page */
+main { padding-bottom: 64px; }
+.intro { padding-block: 40px 8px; display: grid; gap: 8px; }
+.intro h1 { font-size: 34px; }
+.section { display: grid; gap: 20px; padding-block: 28px 20px; scroll-margin-top: 96px; }
+.section-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; }
+.section-head h2 { font-size: 24px; }
+.cards { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+
+/* project card */
+.card { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; padding: 22px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); align-content: start; cursor: pointer; transition: border-color .2s; }
+.card:hover { border-color: var(--muted); }
+.card:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.card h3 { font-size: 22px; }
+.card > p, .card .points, .card .kv { max-width: 68ch; }
+.card .devices { justify-content: flex-start; }
+.app-head { display: flex; align-items: center; gap: 14px; }
+.app-icon { width: 52px; height: 52px; border-radius: 12px; flex: none; }
+.app-icon.text { display: grid; place-items: center; background: var(--accent-soft); color: var(--accent); font-family: var(--font-display); font-weight: 700; font-size: 20px; }
+.platforms { font-size: 13px; color: var(--muted); }
+ul.points { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+.kv { display: grid; gap: 4px; }
+.kv b { font-size: 12px; font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 500; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--font-mono); font-size: 12px; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--line); color: var(--muted); }
+.flow { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; }
+.flow span { padding: 5px 10px; border-radius: 8px; background: var(--accent-soft); color: var(--ink); }
+.flow i { font-style: normal; color: var(--muted); }
+.stores { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.stores a { display: inline-flex; border-radius: 8px; }
+.stores a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.stores img { display: block; height: 40px; width: auto; }
+/* Google's badge artwork has transparent padding built in; this makes it match Apple's at 40px. */
+.stores img.google { height: 58px; margin: -9px -8px; }
+
+/* devices */
+.devices { display: flex; align-items: flex-end; justify-content: center; gap: 14px; flex-wrap: wrap; }
+.phone { width: 150px; max-width: 100%; aspect-ratio: 323 / 700; background: var(--device); border-radius: 26px; padding: 6px; box-shadow: 0 18px 40px -18px rgba(0,0,0,.45); flex: none; }
+.phone img, .tablet img { width: 100%; height: 100%; object-fit: cover; border-radius: 20px; display: block; }
+.tablet { width: 230px; max-width: 100%; aspect-ratio: 525 / 700; background: var(--device); border-radius: 18px; padding: 8px; box-shadow: 0 18px 40px -18px rgba(0,0,0,.45); flex: none; }
+.tablet img { border-radius: 10px; }
+.browser { width: 100%; max-width: 560px; border-radius: 12px; overflow: hidden; background: var(--device); box-shadow: 0 18px 40px -18px rgba(0,0,0,.45); }
+.browser .bar { display: flex; gap: 6px; padding: 9px 12px; }
+.browser .bar i { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,.25); }
+.browser img { display: block; width: 100%; }
+.sm .phone { width: 96px; border-radius: 18px; padding: 4px; }
+.sm .phone img { border-radius: 14px; }
+.sm .tablet { width: 148px; padding: 5px; border-radius: 12px; }
+.sm .tablet img { border-radius: 8px; }
+.sm .browser { max-width: 100%; }
+
+/* writing */
+.posts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.post { display: grid; gap: 10px; align-content: start; text-decoration: none; min-width: 0; }
+.post .cover { aspect-ratio: 16 / 10; border-radius: 12px; overflow: hidden; background: var(--placeholder); border: 1px solid var(--line); }
+.post .cover img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.post h4 { margin: 0; font-size: 16px; line-height: 1.3; font-weight: 600; }
+.post time { font-size: 12px; font-family: var(--font-mono); color: var(--muted); }
+.post:hover h4 { color: var(--accent); }
+
+/* contact */
+.contact { border-top: 1px solid var(--line); margin-top: 24px; padding-block: 32px 0; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; scroll-margin-top: 96px; }
+.contact h2 { font-size: 22px; }
+.links { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 14px; font-weight: 500; }
+.links a { text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+
+/* full-screen project view */
+html.locked { overflow: hidden; }
+.fs { position: fixed; inset: 0; z-index: 50; background: var(--bg); overflow-y: auto; overscroll-behavior: contain;
+  padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); animation: fs-in .22s ease-out; }
+@keyframes fs-in { from { opacity: .4; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+.fs-bar { position: sticky; top: 0; z-index: 2; background: color-mix(in srgb, var(--bg) 90%, transparent); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.fs-bar .wrap { display: flex; align-items: center; gap: 12px; padding-block: 10px; }
+.fs-bar .title { flex: 1; min-width: 0; font-family: var(--font-display); font-weight: 700; font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.fs-bar .count { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+.icon-btn { font: inherit; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px; height: 36px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.icon-btn:hover { border-color: var(--muted); }
+.icon-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.fs-gallery { display: flex; gap: 36px; overflow-x: auto; scroll-snap-type: x proximity; padding-block: 40px 28px; align-items: flex-start; }
+.fs-gallery.grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; overflow: visible; }
+.fs-gallery.grid .fs-group { min-width: 0; }
+.fs-gallery.grid .browser { width: 100%; }
+.fs-group { display: grid; gap: 12px; scroll-snap-align: start; flex: none; }
+.fs-group > span { font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.fs-group .devices { flex-wrap: nowrap; justify-content: flex-start; gap: 18px; }
+.fs .phone { width: 220px; border-radius: 34px; padding: 8px; }
+.fs .phone img { border-radius: 27px; }
+.fs .tablet { width: 380px; border-radius: 24px; padding: 10px; }
+.fs .tablet img { border-radius: 14px; }
+.fs .browser { width: min(820px, 86vw); max-width: none; }
+.fs-gallery img { cursor: zoom-in; }
+.fs-hint { font-size: 13px; color: var(--muted); padding-bottom: 8px; }
+.fs-story { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 48px; padding-block: 28px 64px; border-top: 1px solid var(--line); }
+.fs-story .main { display: grid; gap: 18px; align-content: start; }
+.fs-story .main h2 { font-size: clamp(32px, 5vw, 48px); }
+.fs-story .tag { font-size: 20px; }
+.fs-story .facts { display: grid; gap: 20px; align-content: start; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+.fs-next { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-bottom: 48px; }
+.lightbox { position: fixed; inset: 0; z-index: 60; background: rgba(8,10,14,.92); display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); cursor: zoom-out; }
+.lightbox[hidden] { display: none; }
+.lightbox img { max-height: 90vh; max-width: 100%; border-radius: 16px; }
+
+@media (max-width: 860px) {
+  .posts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .phone { width: 120px; }
+  .tablet { width: 180px; }
+  .fs-story { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .fs .phone { width: 170px; }
+  .fs .tablet { width: 280px; }
+}
+@media (max-width: 720px) {
+  .fs-gallery.grid { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 480px) {
+  .posts { grid-template-columns: minmax(0, 1fr); }
+  .phone { width: 104px; border-radius: 20px; padding: 5px; }
+  .tablet { width: 150px; }
+  .fs .phone { width: 150px; border-radius: 26px; padding: 6px; }
+  .fs .phone img { border-radius: 21px; }
+  .fs .tablet { width: 240px; }
+  .fs-bar .count, .icon-btn .lbl { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+<header class="topnav gutter"><div class="wrap">
+  <span class="brand"><b>Guy Lis</b><span>Mobile Developer · iOS &amp; Android</span></span>
+  <nav aria-label="Sections"><a href="#apps">Apps</a><a href="#beyond">Beyond mobile</a><a href="#writing">Writing</a><a href="#contact">Contact</a></nav>
+</div></header>
+<main class="gutter"><div class="wrap" id="page"></div></main>
+<div id="fs" class="fs" role="dialog" aria-modal="true" aria-labelledby="fs-title" hidden></div>
+<div id="lightbox" class="lightbox" hidden><img alt="Enlarged screenshot"></div>
+
+<script>
+/* ---------- content ---------- */
+const ME = {
+  links: [
+    ["GitHub", "https://github.com/guylis"],
+    ["LinkedIn", "https://www.linkedin.com/in/guy-lis-b0897178/"],
+    ["Medium", "https://medium.com/@guylis"],
+    ["guylis@gmail.com", "mailto:guylis@gmail.com"]
+  ]
+};
+
+const APPS = [
+  {
+    id: "where2eat", name: "Where2Eat", icon: "assets/icon-w2e.png", platforms: "iOS · Android",
+    tagline: "Restaurant reviews from Israel and abroad, in your pocket.",
+    points: ["A feed of reviews with category filters and search", "A map of every reviewed place", "A notification when a new review is published"],
+    role: "Solo: product, design, development, release on both stores.",
+    highlight: "One product built natively twice, with the same features on iPhone and Android.",
+    chips: ["Swift", "UIKit", "Realm", "Android", "Room", "Firebase", "Google Maps"],
+    stores: [
+      ["apple", "https://apps.apple.com/us/app/where2eat-%D7%97%D7%99%D7%A4%D7%95%D7%A9-%D7%9E%D7%A1%D7%A2%D7%93%D7%95%D7%AA/id1541791512"],
+      ["google", "https://play.google.com/store/apps/details?id=foxfoodreviews.wheretoeat"]
+    ],
+    shots: [{ t: "phone", src: "assets/w2e-ios-feed.jpg" }, { t: "phone", src: "assets/w2e-ios-details.jpg" }, { t: "phone", src: "assets/w2e-android-map.jpg" }],
+    gallery: [
+      { label: "iPhone", shots: [{ t: "phone", src: "assets/w2e-ios-feed.jpg" }, { t: "phone", src: "assets/w2e-ios-details.jpg" }, { t: "phone", src: "assets/w2e-ios-map.jpg" }] },
+      { label: "Android", shots: [{ t: "phone", src: "assets/w2e-android-feed.jpg" }, { t: "phone", src: "assets/w2e-android-world.jpg" }, { t: "phone", src: "assets/w2e-android-details.jpg" }, { t: "phone", src: "assets/w2e-android-map.jpg" }] }
+    ]
+  },
+  {
+    id: "fundz", name: "Fundz", icon: "assets/icon-fundz.png", platforms: "iOS · iPadOS · Android",
+    tagline: "Compare Israeli study funds by returns, fees and size.",
+    points: ["Data for 43 funds, straight from the regulator's GemelNet feed", "Filter by fund type, sort by returns from 1 month to 3 years, fees or size", "Side-by-side comparison, with dedicated iPad layouts"],
+    role: "Solo: product, design, development, release on both stores.",
+    highlight: "Works offline. Data is cached on the device and refreshed with parallel requests.",
+    chips: ["SwiftUI", "Jetpack Compose", "Realm", "Room", "RTL Hebrew"],
+    stores: [
+      ["apple", "https://apps.apple.com/il/app/fundz/id6756972418"],
+      ["google", "https://play.google.com/store/apps/details?id=com.guylis.fundz"]
+    ],
+    shots: [{ t: "phone", src: "assets/fundz-iphone-main.jpg" }, { t: "phone", src: "assets/fundz-iphone-details.jpg" }, { t: "tablet", src: "assets/fundz-ipad-compare.jpg" }, { t: "phone", src: "assets/fundz-android-list.jpg" }],
+    gallery: [
+      { label: "iPhone", shots: [{ t: "phone", src: "assets/fundz-iphone-main.jpg" }, { t: "phone", src: "assets/fundz-iphone-details.jpg" }, { t: "phone", src: "assets/fundz-iphone-compare.jpg" }] },
+      { label: "iPad", shots: [{ t: "tablet", src: "assets/fundz-ipad-main.jpg" }, { t: "tablet", src: "assets/fundz-ipad-details.jpg" }, { t: "tablet", src: "assets/fundz-ipad-compare.jpg" }] },
+      { label: "Android", shots: [{ t: "phone", src: "assets/fundz-android-list.jpg" }, { t: "phone", src: "assets/fundz-android-details.jpg" }] }
+    ]
+  }
+];
+
+const SIDE = [
+  {
+    id: "stockwatch", name: "Stock Watch", mono: "SW", platforms: "Python service + web dashboard",
+    tagline: "Live price alerts for stocks, currencies and Israeli funds.",
+    points: ["Streams live trades and polls daily fund prices", "Rules per instrument: above, below, or moves by a percentage", "Emails me when a rule fires, then switches it off"],
+    flow: ["Live prices", "My rules", "Email alert"],
+    chips: ["Python", "WebSockets", "Finnhub", "SQLite"],
+    shots: [{ t: "browser", src: "assets/stockwatch.jpg" }],
+    gallery: [
+      { label: "Web dashboard", shots: [{ t: "browser", src: "assets/stockwatch-full.jpg", w: 560 }] },
+      { label: "Alert email", shots: [{ t: "browser", src: "assets/stockwatch-email.jpg" }] }
+    ]
+  },
+  {
+    id: "budget", name: "Budget Manager", mono: "BM", platforms: "Python multi-agent app + web UI",
+    tagline: "Reads my credit-card statements and shows where the money went.",
+    points: ["An AI agent sorts every transaction into my own categories", "Remembers my corrections, so repeat merchants skip the model", "Forecasts next month and checks the forecast against what happened"],
+    ai: "At runtime, one agent classifies and another forecasts.",
+    flow: ["Card statement", "Classifier agent", "Forecast agent", "Monthly summary"],
+    chips: ["Python", "LLM agents", "Hebrew UI"],
+    shots: [{ t: "browser", src: "assets/budget-forecast.jpg", w: 520 }],
+    galleryGrid: true,
+    gallery: [
+      { label: "This month · forecast", shots: [{ t: "browser", src: "assets/budget-forecast.jpg" }] },
+      { label: "Forecast vs actual", shots: [{ t: "browser", src: "assets/budget-compare.jpg", w: 440 }] },
+      { label: "Upcoming payments", shots: [{ t: "browser", src: "assets/budget-installments.jpg" }] },
+      { label: "History · groceries", shots: [{ t: "browser", src: "assets/budget-groceries.jpg", w: 420 }] }
+    ]
+  }
+];
+
+const ALL = [...APPS, ...SIDE];
+
+// [title, date, cover image, article URL]. Static by design: Medium's RSS can't be read cross-origin.
+const POSTS = [
+  ["Jenkins vs GitHub Actions", "Apr 2025", "assets/cover0.jpg", "https://medium.com/@guylis/jenkins-vs-github-actions-eec8ffcd4b07"],
+  ["Release process — why do we run from it?", "Dec 2024", "assets/cover1.jpg", "https://medium.com/@guylis/release-process-why-do-we-run-from-it-fef32bbd28be"],
+  ["Automatic update for new Xcode version", "Nov 2024", "assets/cover2.jpg", "https://medium.com/@guylis/automatic-update-for-new-xcode-version-796e716e25bb"],
+  ["Decoding Mobile Crashes: A Comparative Guide for Android and iOS", "Sep 2024", "assets/cover3.jpg", "https://medium.com/@guylis/decoding-mobile-crashes-a-comparative-guide-for-android-and-ios-c311a9476079"],
+  ["Back to basics: choose your architecture — MVC vs MVP vs MVVM", "May 2023", "assets/cover4.jpg", "https://medium.com/@guylis/back-to-basics-choose-your-architecture-mvc-vs-mvp-vs-mvvm-c96ecc00b6ac"],
+  ["Code reviews — tips and good practices for the reviewer", "Mar 2023", "assets/cover5.jpg", "https://medium.com/@guylis/code-reviews-tips-and-good-practices-for-the-reviewer-61eaf39ab7ab"],
+  ["Lists — the old way vs the new way with Android Compose", "Feb 2023", "assets/cover6.jpg", "https://medium.com/@guylis/lists-the-old-way-vs-the-new-way-with-android-compose-6376ac39f10f"],
+  ["Discover whether a view is visible on the screen — the iOS challenge", "Nov 2022", "assets/cover7.jpg", "https://medium.com/@guylis/discover-whether-a-view-is-visible-on-the-screen-the-ios-challenge-851b0f2b3342"]
+];
+
+const STORE_BADGES = {
+  apple: { src: "assets/badge-app-store.svg", alt: "Download on the App Store", cls: "" },
+  google: { src: "assets/badge-google-play.png", alt: "Get it on Google Play", cls: "google" }
+};
+
+/* ---------- building blocks ---------- */
+const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+const shot = (s, alt) => {
+  const img = `<img src="${s.src}" alt="${alt}" loading="lazy">`;
+  if (s.t === "phone") return `<div class="phone">${img}</div>`;
+  if (s.t === "tablet") return `<div class="tablet">${img}</div>`;
+  return `<div class="browser"${s.w ? ` style="width:min(${s.w}px,86vw)"` : ""}><div class="bar"><i></i><i></i><i></i></div>${img}</div>`;
+};
+const devices = (p, shots, cls = "") => `<div class="devices ${cls}">${shots.map(s => shot(s, `${p.name} screenshot`)).join("")}</div>`;
+const icon = p => p.icon ? `<img class="app-icon" src="${p.icon}" alt="">` : `<div class="app-icon text" aria-hidden="true">${p.mono}</div>`;
+const head = (p, tag = "h3") => `<div class="app-head">${icon(p)}<div><${tag}>${p.name}</${tag}><div class="platforms">${p.platforms}</div></div></div>`;
+const chips = p => `<div class="chips">${p.chips.map(c => `<span class="chip">${c}</span>`).join("")}</div>`;
+const points = p => `<ul class="points">${p.points.map(x => `<li>${x}</li>`).join("")}</ul>`;
+const flow = p => p.flow ? `<div class="flow">${p.flow.map(f => `<span>${f}</span>`).join("<i>→</i>")}</div>` : "";
+const kv = (label, text) => text ? `<div class="kv"><b>${label}</b><span>${text}</span></div>` : "";
+const stores = p => p.stores ? `<div class="stores">${p.stores.map(([k, href]) => {
+  const b = STORE_BADGES[k];
+  return `<a href="${href}" target="_blank" rel="noopener"><img class="${b.cls}" src="${b.src}" alt="${b.alt}"></a>`;
+}).join("")}</div>` : "";
+const links = () => `<div class="links">${ME.links.map(([l, h]) =>
+  `<a href="${h}"${h.startsWith("mailto:") ? "" : ` target="_blank" rel="noopener"`}>${l}</a>`).join("")}</div>`;
+const postCard = ([t, d, cover, url]) => `<a class="post" href="${url}" target="_blank" rel="noopener"><div class="cover"><img src="${cover}" alt="" loading="lazy"></div><time>${d} · Medium</time><h4>${esc(t)}</h4></a>`;
+
+const appCard = p => `<div class="card" data-id="${p.id}" tabindex="0">${head(p)}<p>${p.tagline}</p>${devices(p, p.shots, "sm")}${points(p)}${kv("Highlight", p.highlight)}${chips(p)}${stores(p)}</div>`;
+const sideCard = p => `<div class="card" data-id="${p.id}" tabindex="0">${head(p)}<p>${p.tagline}</p>${devices(p, p.shots, "sm")}${points(p)}${flow(p)}${kv("How AI was used", p.ai)}${chips(p)}</div>`;
+
+/* ---------- page ---------- */
+document.getElementById("page").innerHTML = `
+  <section class="intro">
+    <h1>Things I've built</h1>
+    <p class="muted">Apps I designed, built and shipped on my own.</p>
+  </section>
+  <section class="section" id="apps">
+    <div class="section-head"><h2>Shipped mobile apps</h2><span class="muted">Live on the App Store and Google Play</span></div>
+    <div class="cards">${APPS.map(appCard).join("")}</div>
+  </section>
+  <section class="section" id="beyond">
+    <div class="section-head"><h2>Beyond mobile</h2></div>
+    <div class="cards">${SIDE.map(sideCard).join("")}</div>
+  </section>
+  <section class="section" id="writing">
+    <div class="section-head"><h2>Writing</h2><span class="muted">${POSTS.length} articles on Medium</span></div>
+    <div class="posts">${POSTS.map(postCard).join("")}</div>
+  </section>
+  <section class="contact" id="contact"><h2>Get in touch</h2>${links()}</section>`;
+
+/* ---------- full-screen project view (deep-linkable as #<project-id>) ---------- */
+const fs = document.getElementById("fs");
+const lb = document.getElementById("lightbox");
+let openedInPage = false;
+let lastCard = null;
+
+const fsView = (p, i) => {
+  const prev = ALL[(i - 1 + ALL.length) % ALL.length], next = ALL[(i + 1) % ALL.length];
+  return `
+  <div class="fs-bar gutter"><div class="wrap">
+    <button class="icon-btn" data-fs="close" aria-label="Close">✕ <span class="lbl">Close</span></button>
+    <span class="title" id="fs-title">${p.name}</span>
+    <span class="count">${i + 1} / ${ALL.length}</span>
+    <button class="icon-btn" data-fs="go" data-id="${prev.id}" aria-label="Previous project">←</button>
+    <button class="icon-btn" data-fs="go" data-id="${next.id}" aria-label="Next project">→</button>
+  </div></div>
+  <div class="gutter"><div class="wrap">
+    <div class="fs-gallery${p.galleryGrid ? " grid" : ""}">${p.gallery.map(g => `<div class="fs-group"><span>${g.label}</span>${devices(p, g.shots)}</div>`).join("")}</div>
+    <p class="fs-hint">${p.galleryGrid ? "" : "Scroll sideways for more screens. "}Click a screenshot to enlarge it.</p>
+    <div class="fs-story">
+      <div class="main">
+        ${head(p, "h2")}
+        <p class="tag">${p.tagline}</p>
+        ${points(p)}
+        ${flow(p)}
+        ${stores(p)}
+      </div>
+      <div class="facts">
+        ${kv("What I did", p.role)}
+        ${kv("Highlight", p.highlight)}
+        ${kv("How AI was used", p.ai)}
+        <div class="kv"><b>Built with</b>${chips(p)}</div>
+      </div>
+    </div>
+    <div class="fs-next">
+      <button class="icon-btn" data-fs="go" data-id="${prev.id}">← ${prev.name}</button>
+      <button class="icon-btn" data-fs="go" data-id="${next.id}">${next.name} →</button>
+    </div>
+  </div></div>`;
+};
+
+const renderFromHash = () => {
+  const i = ALL.findIndex(p => p.id === location.hash.slice(1));
+  if (i < 0) {
+    if (!fs.hidden) { fs.hidden = true; document.documentElement.classList.remove("locked"); lastCard?.focus(); }
+    return;
+  }
+  fs.innerHTML = fsView(ALL[i], i);
+  fs.hidden = false;
+  fs.scrollTop = 0;
+  document.documentElement.classList.add("locked");
+  fs.querySelector('[data-fs="close"]').focus();
+};
+const openProject = card => { lastCard = card; openedInPage = true; location.hash = card.dataset.id; };
+const closeProject = () => {
+  if (openedInPage) { openedInPage = false; history.back(); }
+  else { history.replaceState(null, "", location.pathname + location.search); renderFromHash(); }
+};
+
+const page = document.getElementById("page");
+page.addEventListener("click", e => {
+  const card = e.target.closest(".card");
+  if (card && !e.target.closest("a")) openProject(card);
+});
+page.addEventListener("keydown", e => {
+  if (e.key === "Enter" && e.target.classList.contains("card")) openProject(e.target);
+});
+fs.addEventListener("click", e => {
+  const btn = e.target.closest("[data-fs]");
+  if (btn?.dataset.fs === "close") return closeProject();
+  if (btn?.dataset.fs === "go") return location.replace("#" + btn.dataset.id);
+  const img = e.target.closest(".fs-gallery img");
+  if (img) { lb.querySelector("img").src = img.src; lb.hidden = false; }
+});
+lb.addEventListener("click", () => { lb.hidden = true; });
+document.addEventListener("keydown", e => {
+  if (!lb.hidden && e.key === "Escape") { lb.hidden = true; return; }
+  if (fs.hidden) return;
+  if (e.key === "Escape") closeProject();
+  if (e.key === "ArrowLeft" || e.key === "ArrowRight") {
+    const i = ALL.findIndex(p => p.id === location.hash.slice(1));
+    const j = (i + (e.key === "ArrowRight" ? 1 : -1) + ALL.length) % ALL.length;
+    location.replace("#" + ALL[j].id);
+  }
+});
+window.addEventListener("hashchange", renderFromHash);
+renderFromHash();
+</script>
+</body>
+</html>
