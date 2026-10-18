@@ -242,18 +242,6 @@ const APPS = [
 
 const SIDE = [
   {
-    id: "stockwatch", name: "Stock Watch", mono: "SW", platforms: "Python service + web dashboard",
-    tagline: "Live price alerts for stocks, currencies and Israeli funds.",
-    points: ["Streams live trades and polls daily fund prices", "Rules per instrument: above, below, or moves by a percentage", "Emails me when a rule fires, then switches it off"],
-    flow: ["Live prices", "My rules", "Email alert"],
-    chips: ["Python", "WebSockets", "Finnhub", "SQLite"],
-    shots: [{ t: "browser", src: "assets/stockwatch.jpg" }],
-    gallery: [
-      { label: "Web dashboard", shots: [{ t: "browser", src: "assets/stockwatch-full.jpg", w: 560 }] },
-      { label: "Alert email", shots: [{ t: "browser", src: "assets/stockwatch-email.jpg" }] }
-    ]
-  },
-  {
     id: "budget", name: "Budget Manager", mono: "BM", platforms: "Python multi-agent app + web UI",
     tagline: "Reads my credit-card statements and shows where the money went.",
     points: ["An AI agent sorts every transaction into my own categories", "Remembers my corrections, so repeat merchants skip the model", "Forecasts next month and checks the forecast against what happened"],
@@ -267,6 +255,18 @@ const SIDE = [
       { label: "Forecast vs actual", shots: [{ t: "browser", src: "assets/budget-compare.jpg", w: 440 }] },
       { label: "Upcoming payments", shots: [{ t: "browser", src: "assets/budget-installments.jpg" }] },
       { label: "History · groceries", shots: [{ t: "browser", src: "assets/budget-groceries.jpg", w: 420 }] }
+    ]
+  },
+  {
+    id: "stockwatch", name: "Stock Watch", mono: "SW", platforms: "Python service + web dashboard",
+    tagline: "Live price alerts for stocks, currencies and Israeli funds.",
+    points: ["Streams live trades and polls daily fund prices", "Rules per instrument: above, below, or moves by a percentage", "Emails me when a rule fires, then switches it off"],
+    flow: ["Live prices", "My rules", "Email alert"],
+    chips: ["Python", "WebSockets", "Finnhub", "SQLite"],
+    shots: [{ t: "browser", src: "assets/stockwatch.jpg" }],
+    gallery: [
+      { label: "Web dashboard", shots: [{ t: "browser", src: "assets/stockwatch-full.jpg", w: 560 }] },
+      { label: "Alert email", shots: [{ t: "browser", src: "assets/stockwatch-email.jpg" }] }
     ]
   }
 ];
